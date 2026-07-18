@@ -1,4 +1,4 @@
-package com.aula.pb.inicio;
+package br.com.ranieri.serverest;
 
 import java.util.Date;
 import io.restassured.http.ContentType;
@@ -36,7 +36,7 @@ public class ServeRestTest {
                 .when()
                 .get("/usuarios/{id}", "0uxuPY0cbmQhpEz1")
                 .then()
-                .assertThat()
+                .assertThat() // validação do retorno
                 .statusCode(200)
                 .and()
                 .body("nome", equalTo("Fulano da Silva"))
