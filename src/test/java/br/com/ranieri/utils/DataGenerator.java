@@ -18,4 +18,8 @@ public class DataGenerator {
     public String gerarSenha(){
         return faker.number().digits(6);
     }
+    //para gerar um id aleatorio de 16 caracteres eu faço
+    public String gerarIdAleatorio(){
+        return faker.random().hex(16);
+    }
 }

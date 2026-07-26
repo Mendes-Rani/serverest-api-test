@@ -14,7 +14,6 @@ public class ListarUsuarioSucessoTest extends BaseTest {
     @Test
     public void deveListarUsuariosCadastrados(){
         given()
-                .baseUri(baseURI)
         .when()
                 .get("/usuarios")
         .then()
@@ -33,7 +32,6 @@ public class ListarUsuarioSucessoTest extends BaseTest {
         //System.out.println("id_usuario: " + id_usuario);
 
         given()
-                .baseUri(baseURI)
         .when()
                 .get("/usuarios/{_id}", id_usuario)
         .then()
