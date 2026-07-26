@@ -27,11 +27,21 @@ src
                     └── ranieri
                         └── base
                             ├── BaseTest.java
+                        └── model
+                        └── payload
+                        └── services    
+                            └── UsuarioService.java
                         └── usuarios
                             └── funcional
                                 ├── CadastrarUsuarioAdminSucessoTest.java
                                 ├── ListarUsuarioSucessoTest.java  
-                            └── negativo                             
+                                ├── CadastrarUsuarioComumSucessoTest.java
+                                ├── ExcluirUsuarioSucessoTest.java
+                            └── negativo    
+                                ├── CadastrarUsuarioNegativoTest.java    
+                                ├── ListarUsuarioErroTest.java   
+                        └── utils                          
+                            └── DataGenerator.java
 ```                            
                            
 ## Como Executar os Testes
