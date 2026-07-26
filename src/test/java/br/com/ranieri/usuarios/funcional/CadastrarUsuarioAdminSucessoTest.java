@@ -1,6 +1,7 @@
 package br.com.ranieri.usuarios.funcional;
 
 import br.com.ranieri.base.BaseTest;
+import br.com.ranieri.utils.DataGenerator;
 import com.github.javafaker.Faker;
 import io.restassured.http.ContentType;
 import org.junit.Test;
@@ -11,19 +12,19 @@ import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 
-public class CadastrarUsuarioSucessoTest extends BaseTest {
-    // Implementar os testes de cadastro de usuário com sucesso
-    Faker faker = new Faker(new Locale("pt-BR"));
-    String name = faker.name().fullName();
-    String email = faker.internet().emailAddress();
-    String password = faker.number().digits(6);
+public class CadastrarUsuarioAdminSucessoTest extends BaseTest {
 
     @Test
     public void deveCadastrarUsuarioAdminComSucesso(){
+        DataGenerator dataGenerator = new DataGenerator();
+        String nome = dataGenerator.gerarNome();
+        String email = dataGenerator.gerarEmail();
+        String senha = dataGenerator.gerarSenha();
+
         String payload = "{\n" +
-                "  \"nome\": \"" + name + "\",\n" +
+                "  \"nome\": \"" + nome + "\",\n" +
                 "  \"email\": \"" + email + "\",\n" +
-                "  \"password\": \"" + password + "\",\n" +
+                "  \"password\": \"" + senha + "\",\n" +
                 "  \"administrador\": \"true\"\n" +
                 "}";
         //System.out.println("Payload: " + payload);
@@ -49,9 +50,9 @@ public class CadastrarUsuarioSucessoTest extends BaseTest {
                 .then()
                 .statusCode(200)
                 .body("_id", equalTo(idUsuario))
-                .body("nome", equalTo(name))
+                .body("nome", equalTo(nome))
                 .body("email", equalTo(email))
-                .body("password", equalTo(password))
+                .body("password", equalTo(senha))
                 .body("administrador", equalTo("true"))
                 ;
 

@@ -18,20 +18,20 @@ O projeto está organizado da seguinte forma:
 ```
 src
 └── main
-    └── java
-        └── br
-            └── com 
-                └── ranieri
-                    └── base
-                        ├── BaseTest.java
+    └── java                    
     
     test
         └── java
             └── br
                 └── com 
                     └── ranieri
-                        └── funcional
-                            ├── UsuarioTest.java
+                        └── base
+                            ├── BaseTest.java
+                        └── usuarios
+                            └── funcional
+                                ├── CadastrarUsuarioAdminSucessoTest.java
+                                ├── ListarUsuarioSucessoTest.java  
+                            └── negativo                             
 ```                            
                            
 ## Como Executar os Testes
