@@ -33,11 +33,14 @@ src
                             └── UsuarioService.java
                         └── usuarios
                             └── funcional
-                                ├── CadastrarUsuarioAdminSucessoTest.java
-                                ├── ListarUsuarioSucessoTest.java  
+                                ├── AtualizarUsuarioSucessoTest.java
+                                ├── CadastrarUsuarioAdminSucessoTest.java                         
                                 ├── CadastrarUsuarioComumSucessoTest.java
+                                ├── CriarUsuarioViaPutSucessoTest.java
                                 ├── ExcluirUsuarioSucessoTest.java
-                            └── negativo    
+                                ├── ListarUsuarioSucessoTest.java
+                            └── negativo  
+                                ├── AtualizarUsuarioErroTest.java  
                                 ├── CadastrarUsuarioNegativoTest.java    
                                 ├── ListarUsuarioErroTest.java   
                         └── utils                          
