@@ -10,7 +10,7 @@ import static org.hamcrest.Matchers.is;
 
 public class CadastrarUsuarioNegativoTest extends BaseTest {
     @Test
-    public void naoDeveCadastrarUsuarioComEmailExistente(){
+    public void naoDeveCadastrarUsuarioComEmailExistenteTest(){
 
         DataGenerator dataGenerator = new DataGenerator();
         String primeiroNome = dataGenerator.gerarNome();

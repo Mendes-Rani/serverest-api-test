@@ -1,6 +1,7 @@
 package br.com.ranieri.usuarios.funcional;
 
 import br.com.ranieri.base.BaseTest;
+import br.com.ranieri.dto.Usuario;
 import br.com.ranieri.services.UsuarioService;
 import br.com.ranieri.utils.DataGenerator;
 import io.restassured.http.ContentType;
@@ -14,7 +15,7 @@ public class AtualizarUsuarioSucessoTest extends BaseTest {
     @Test
     public void deveAtualizarUsuarioExistenteComSucessoTest(){
         UsuarioService usuarioService = new UsuarioService();
-        String idUsuario = usuarioService.criarUsuario();
+        Usuario usuario = usuarioService.criarUsuario();
 
         DataGenerator dataGenerator = new DataGenerator();
         String novoNome = dataGenerator.gerarNome();
@@ -32,7 +33,7 @@ public class AtualizarUsuarioSucessoTest extends BaseTest {
                 .body(payloadAtualizacao)
                 .contentType(ContentType.JSON)
                 .when()
-                .put("/usuarios/{_id}", idUsuario)
+                .put("/usuarios/{_id}", usuario.getId())
                 .then()
                 .statusCode(200)
                 .body("message", is("Registro alterado com sucesso"))
@@ -40,10 +41,10 @@ public class AtualizarUsuarioSucessoTest extends BaseTest {
 
         given()
                 .when()
-                .get("/usuarios/{_id}", idUsuario)
+                .get("/usuarios/{_id}", usuario.getId())
                 .then()
                 .statusCode(200)
-                .body("_id", equalTo(idUsuario))
+                .body("_id", equalTo(usuario.getId()))
                 .body("nome", equalTo(novoNome))
                 .body("email", equalTo(novoEmail))
                 .body("password", equalTo(novaSenha))

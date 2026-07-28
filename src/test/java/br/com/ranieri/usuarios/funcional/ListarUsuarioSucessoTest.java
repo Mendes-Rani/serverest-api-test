@@ -12,7 +12,7 @@ public class ListarUsuarioSucessoTest extends BaseTest {
     // Implementar os testes de listagem de usuário com sucesso
 
     @Test
-    public void deveListarUsuariosCadastrados(){
+    public void deveListarUsuariosCadastradosTest(){
         given()
         .when()
                 .get("/usuarios")
@@ -23,7 +23,7 @@ public class ListarUsuarioSucessoTest extends BaseTest {
     }
 
     @Test
-    public void deveListarUsuarioEspecifico(){
+    public void deveListarUsuarioEspecificoTest(){
 
         String response = get("/usuarios").asString(); // Retorna a resposta da requisição como uma String
         JsonPath jsonPath = new JsonPath(response); // Cria um objeto JsonPath a partir da resposta

@@ -1,6 +1,7 @@
 package br.com.ranieri.usuarios.funcional;
 
 import br.com.ranieri.base.BaseTest;
+import br.com.ranieri.dto.Usuario;
 import br.com.ranieri.services.UsuarioService;
 import br.com.ranieri.utils.DataGenerator;
 import org.junit.Test;
@@ -12,11 +13,11 @@ public class ExcluirUsuarioSucessoTest extends BaseTest {
     @Test
     public void deveExcluirUsuarioExistenteComSucessoTest(){
         UsuarioService usuarioService = new UsuarioService();
-        String idUsuario = usuarioService.criarUsuario();
+        Usuario usuario = usuarioService.criarUsuario();
 
         given()
                 .when()
-                .delete("/usuarios/{_id}", idUsuario)
+                .delete("/usuarios/{_id}", usuario.getId())
                 .then()
                 .statusCode(200)
                 .body("message", is("Registro excluído com sucesso"))
@@ -24,7 +25,7 @@ public class ExcluirUsuarioSucessoTest extends BaseTest {
 
         given()
                 .when()
-                .get("/usuarios/{_id}", idUsuario)
+                .get("/usuarios/{_id}", usuario.getId())
                 .then()
                 .statusCode(400)
                 .body("message", is("Usuário não encontrado"))

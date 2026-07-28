@@ -1,6 +1,7 @@
 package br.com.ranieri.usuarios.negativo;
 
 import br.com.ranieri.base.BaseTest;
+import br.com.ranieri.dto.Usuario;
 import br.com.ranieri.services.UsuarioService;
 import br.com.ranieri.utils.DataGenerator;
 import io.restassured.http.ContentType;
@@ -14,7 +15,7 @@ public class AtualizarUsuarioErroTest extends BaseTest {
     @Test
     public void naoDeveAtualizarUsuarioComEmailJaCadastradoTest(){
         UsuarioService usuarioService = new UsuarioService();
-        String idPrimeiroUsuario = usuarioService.criarUsuario();
+        Usuario usuario = usuarioService.criarUsuario();
 
         DataGenerator dataGenerator = new DataGenerator();
         String nomeSegundoUsuario = dataGenerator.gerarNome();
@@ -52,7 +53,7 @@ public class AtualizarUsuarioErroTest extends BaseTest {
                 .body(payloadAtualizacaoPrimeiroUsuario)
                 .contentType(ContentType.JSON)
                 .when()
-                .put("/usuarios/{_id}", idPrimeiroUsuario)
+                .put("/usuarios/{_id}", usuario.getId())
                 .then()
                 .statusCode(400)
                 .body("message", is("Este email já está sendo usado"))
