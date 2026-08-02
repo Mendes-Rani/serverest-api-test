@@ -1,6 +1,7 @@
 package br.com.ranieri.login.funcional;
 
 import br.com.ranieri.base.BaseTest;
+import br.com.ranieri.dto.LoginRequest;
 import br.com.ranieri.dto.Usuario;
 import br.com.ranieri.services.UsuarioService;
 import io.restassured.http.ContentType;
@@ -18,26 +19,22 @@ public class LoginSucessoTest extends BaseTest {
         UsuarioService usuarioService = new UsuarioService();
         Usuario usuario = usuarioService.criarUsuarioAdmin();
 
-        String dadosLogin = "{\n" +
-                "  \"email\": \"" + usuario.getEmail() + "\",\n" +
-                "  \"password\": \"" + usuario.getSenha() + "\"\n" +
-                "}";
-
-        //System.out.println("Dados de login: " + dadosLogin);
+        LoginRequest loginRequest = new LoginRequest();
+        loginRequest.setEmail(usuario.getEmail());
+        loginRequest.setSenha(usuario.getSenha());
 
         String tokenAdmin = given()
-                .body(dadosLogin)
+                .body(loginRequest)
                 .contentType(ContentType.JSON)
                 .when()
                 .post("/login")
                 .then()
                 .statusCode(200)
                 .body("message", is("Login realizado com sucesso"))
-                .body("authorization", is(notNullValue()))
+                .body("authorization", notNullValue())
                 .body("authorization", not(emptyString()))
                 .extract()
                 .path("authorization")
-                //.log().all()
                 ;
     }
 
@@ -46,22 +43,20 @@ public class LoginSucessoTest extends BaseTest {
         UsuarioService usuarioService = new UsuarioService();
         Usuario usuario = usuarioService.criarUsuario();
 
-        String dadosLogin = "{\n" +
-                "  \"email\": \""+ usuario.getEmail() + "\",\n" +
-                "  \"password\": \"" + usuario.getSenha() + "\"\n" +
-                "}";
+        LoginRequest loginRequest = new LoginRequest();
+        loginRequest.setEmail(usuario.getEmail());
+        loginRequest.setSenha(usuario.getSenha());
 
         String tokenUser = given()
-                .body(dadosLogin)
+                .body(loginRequest)
                 .contentType(ContentType.JSON)
                 .when()
                 .post("/login")
                 .then()
                 .statusCode(200)
                 .body("message", is("Login realizado com sucesso"))
-                .body("authorization", is(notNullValue()))
+                .body("authorization", notNullValue())
                 .body("authorization", not(emptyString()))
-                //.log().all()
                 .extract()
                 .path("authorization")
                 ;

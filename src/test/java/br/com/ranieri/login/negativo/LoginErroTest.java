@@ -1,6 +1,7 @@
 package br.com.ranieri.login.negativo;
 
 import br.com.ranieri.base.BaseTest;
+import br.com.ranieri.dto.LoginRequest;
 import br.com.ranieri.dto.Usuario;
 import br.com.ranieri.services.UsuarioService;
 import br.com.ranieri.utils.DataGenerator;
@@ -13,24 +14,23 @@ import static org.hamcrest.Matchers.is;
 public class LoginErroTest extends BaseTest {
     @Test
     public void naoDeveFazerLoginComEmailInvalido(){
-        DataGenerator dataGenerator = new DataGenerator();
-        String emailInvalido = dataGenerator.gerarEmail();
-        String senhaInvalida = dataGenerator.gerarSenha();
+        UsuarioService usuarioService = new UsuarioService();
+        Usuario usuario = usuarioService.criarUsuario();
 
-        String dadosLogin = "{\n" +
-                "  \"email\": \"" + emailInvalido + "\",\n" +
-                "  \"password\": \"" + senhaInvalida + "\"\n" +
-                "}";
+        DataGenerator dataGenerator = new DataGenerator();
+
+        LoginRequest loginRequest = new LoginRequest();
+        loginRequest.setEmail(dataGenerator.gerarEmail());
+        loginRequest.setSenha(usuario.getSenha());
 
         given()
-                .body(dadosLogin)
+                .body(loginRequest)
                 .contentType(ContentType.JSON)
                 .when()
                 .post("/login")
                 .then()
                 .statusCode(401)
                 .body("message", is("Email e/ou senha inválidos"))
-                //.log().all()
                 ;
 
     }
@@ -40,50 +40,40 @@ public class LoginErroTest extends BaseTest {
         UsuarioService usuarioService = new UsuarioService();
         Usuario usuario = usuarioService.criarUsuario();
 
-        DataGenerator dataGenerator = new DataGenerator();
-        String senhaInvalida = dataGenerator.gerarSenha();
+        String senhaInvalida = "SenhaInvalida123";
 
-        String dadosLogin = "{\n" +
-                "  \"email\": \"" + usuario.getEmail() + "\",\n" +
-                "  \"password\": \"" + senhaInvalida + "\"\n" +
-                "}\n";
+        LoginRequest loginRequest = new LoginRequest();
+        loginRequest.setEmail(usuario.getEmail());
+        loginRequest.setSenha(senhaInvalida);
 
         given()
-                .body(dadosLogin)
+                .body(loginRequest)
                 .contentType(ContentType.JSON)
                 .when()
                 .post("/login")
                 .then()
                 .statusCode(401)
                 .body("message", is("Email e/ou senha inválidos"))
-                //.log().all()
                 ;
-
-
 
     }
 
     @Test
     public void naoDeveFazerLoginComEmailESenhaInvalidos(){
         DataGenerator dataGenerator = new DataGenerator();
-        String emailInvalido = dataGenerator.gerarEmail();
-        String senhaInvalida = dataGenerator.gerarSenha();
 
-        String dadosLogin = "{\n" +
-                "  \"email\": \"" + emailInvalido + "\",\n" +
-                "  \"password\": \"" + senhaInvalida + "\"\n" +
-                "}\n";
+        LoginRequest loginRequest = new LoginRequest();
+        loginRequest.setEmail(dataGenerator.gerarEmail());
+        loginRequest.setSenha(dataGenerator.gerarSenha());
 
         given()
-                .body(dadosLogin)
+                .body(loginRequest)
                 .contentType(ContentType.JSON)
                 .when()
                 .post("/login")
                 .then()
                 .statusCode(401)
                 .body("message", is("Email e/ou senha inválidos"))
-                //.log().all()
                 ;
-
     }
 }

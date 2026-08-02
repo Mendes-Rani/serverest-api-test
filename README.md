@@ -48,6 +48,7 @@ src
                     │
                     ├── dto
                     │   └── Usuario.java
+                    │   └── LoginRequest.java
                     │
                     ├── services
                     │   └── UsuarioService.java
