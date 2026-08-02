@@ -13,7 +13,7 @@ import static org.hamcrest.Matchers.is;
 
 public class AtualizarUsuarioSucessoTest extends BaseTest {
     @Test
-    public void deveAtualizarUsuarioExistenteComSucessoTest(){
+    public void deveAtualizarUsuarioExistenteComSucesso(){
         UsuarioService usuarioService = new UsuarioService();
         Usuario usuario = usuarioService.criarUsuario();
 
@@ -22,15 +22,15 @@ public class AtualizarUsuarioSucessoTest extends BaseTest {
         String novoEmail = dataGenerator.gerarEmail();
         String novaSenha = dataGenerator.gerarSenha();
 
-        String payloadAtualizacao = "{\n" +
-                "  \"nome\": \"" + novoNome + "\",\n" +
-                "  \"email\": \"" + novoEmail + "\",\n" +
-                "  \"password\": \"" + novaSenha + "\",\n" +
-                "  \"administrador\": \"false\"\n" +
-                "}";
+        Usuario usuarioAtualizado = new Usuario();
+
+        usuarioAtualizado.setNome(novoNome);
+        usuarioAtualizado.setEmail(novoEmail);
+        usuarioAtualizado.setSenha(novaSenha);
+        usuarioAtualizado.setAdministrador("false");
 
         given()
-                .body(payloadAtualizacao)
+                .body(usuarioAtualizado)
                 .contentType(ContentType.JSON)
                 .when()
                 .put("/usuarios/{_id}", usuario.getId())

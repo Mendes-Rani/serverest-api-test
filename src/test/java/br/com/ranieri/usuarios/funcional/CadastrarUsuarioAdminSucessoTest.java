@@ -25,8 +25,7 @@ public class CadastrarUsuarioAdminSucessoTest extends BaseTest {
                 .body("email", equalTo(usuario.getEmail()))
                 .body("password", equalTo(usuario.getSenha()))
                 .body("administrador", equalTo(usuario.getAdministrador()))
-                //.log().all()
-                ;
+        ;
 
     }
 

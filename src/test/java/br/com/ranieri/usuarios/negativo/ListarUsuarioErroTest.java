@@ -9,11 +9,9 @@ import static org.hamcrest.Matchers.is;
 
 public class ListarUsuarioErroTest extends BaseTest {
     @Test
-    public void naoDeveListarUsuarioInexistenteTest(){
+    public void naoDeveListarUsuarioInexistente(){
         DataGenerator dataGenerator = new DataGenerator();
         String idInexistente = dataGenerator.gerarIdAleatorio();
-
-        //System.out.println("idInexistente: " + idInexistente);
 
         given()
                 .when()

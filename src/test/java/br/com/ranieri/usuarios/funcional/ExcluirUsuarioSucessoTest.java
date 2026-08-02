@@ -11,7 +11,7 @@ import static org.hamcrest.Matchers.is;
 
 public class ExcluirUsuarioSucessoTest extends BaseTest {
     @Test
-    public void deveExcluirUsuarioExistenteComSucessoTest(){
+    public void deveExcluirUsuarioExistenteComSucesso(){
         UsuarioService usuarioService = new UsuarioService();
         Usuario usuario = usuarioService.criarUsuario();
 
@@ -33,7 +33,7 @@ public class ExcluirUsuarioSucessoTest extends BaseTest {
     }
 
     @Test
-    public void naoDeveExcluirUsuarioInexistenteTest() {
+    public void naoDeveExcluirUsuarioInexistente() {
         DataGenerator dataGenerator = new DataGenerator();
         String idInexistente = dataGenerator.gerarIdAleatorio();
 
@@ -46,6 +46,5 @@ public class ExcluirUsuarioSucessoTest extends BaseTest {
                 ;
 
     }
-
 
 }

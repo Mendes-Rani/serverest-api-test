@@ -12,23 +12,17 @@ public class UsuarioService {
     private DataGenerator dataGenerator = new DataGenerator();
 
     public Usuario criarUsuario(boolean administrador){
-        String nome = dataGenerator.gerarNome();
-        String email = dataGenerator.gerarEmail();
-        String senha = dataGenerator.gerarSenha();
-
-        String tipoAdministrador = String.valueOf(administrador);
 
         Usuario usuario = new Usuario();
 
-        String payload = "{\n" +
-                "  \"nome\": \"" + nome + "\",\n" +
-                "  \"email\": \"" + email + "\",\n" +
-                "  \"password\": \"" + senha + "\",\n" +
-                "  \"administrador\": \"" + tipoAdministrador + "\"\n" +
-                "}";
+        usuario.setNome(dataGenerator.gerarNome());
+        usuario.setEmail(dataGenerator.gerarEmail());
+        usuario.setSenha(dataGenerator.gerarSenha());
+        usuario.setAdministrador(String.valueOf(administrador));
+
 
         String id = given()
-                .body(payload)
+                .body(usuario)
                 .contentType(ContentType.JSON)
                 .when()
                 .post("/usuarios")
@@ -41,10 +35,6 @@ public class UsuarioService {
                 ;
 
         usuario.setId(id);
-        usuario.setNome(nome);
-        usuario.setEmail(email);
-        usuario.setSenha(senha);
-        usuario.setAdministrador(tipoAdministrador);
 
         return usuario;
 

@@ -1,10 +1,19 @@
 package br.com.ranieri.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Usuario {
+
+    @JsonIgnore
     private String id;
+
     private String nome;
     private String email;
+
+    @JsonProperty("password")
     private String senha;
+
     private String administrador;
 
     public Usuario(){

@@ -10,7 +10,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class CadastrarUsuarioComumSucessoTest extends BaseTest {
     @Test
-    public void deveCadastrarUsuarioComumSucesso(){
+    public void deveCadastrarUsuarioComumComSucesso(){
         UsuarioService usuarioService = new UsuarioService();
         Usuario usuario = usuarioService.criarUsuario();
 
@@ -24,7 +24,6 @@ public class CadastrarUsuarioComumSucessoTest extends BaseTest {
                 .body("email", equalTo(usuario.getEmail()))
                 .body("password", equalTo(usuario.getSenha()))
                 .body("administrador", equalTo("false"))
-                //.log().all()
                 ;
 
     }

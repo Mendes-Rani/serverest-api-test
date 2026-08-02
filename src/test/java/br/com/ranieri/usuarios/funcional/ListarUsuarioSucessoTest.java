@@ -1,18 +1,19 @@
 package br.com.ranieri.usuarios.funcional;
 
 import br.com.ranieri.base.BaseTest;
-import io.restassured.path.json.JsonPath;
+import br.com.ranieri.dto.Usuario;
+import br.com.ranieri.services.UsuarioService;
 import org.junit.Test;
 
 import static io.restassured.RestAssured.*;
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 
 public class ListarUsuarioSucessoTest extends BaseTest {
-    // Implementar os testes de listagem de usuário com sucesso
 
     @Test
-    public void deveListarUsuariosCadastradosTest(){
+    public void deveListarUsuariosCadastradosComSucesso(){
         given()
         .when()
                 .get("/usuarios")
@@ -23,25 +24,22 @@ public class ListarUsuarioSucessoTest extends BaseTest {
     }
 
     @Test
-    public void deveListarUsuarioEspecificoTest(){
+    public void deveListarUsuarioEspecificoComSucesso(){
 
-        String response = get("/usuarios").asString(); // Retorna a resposta da requisição como uma String
-        JsonPath jsonPath = new JsonPath(response); // Cria um objeto JsonPath a partir da resposta
-        String id_usuario = jsonPath.getString("usuarios[0]._id"); // Pega o id do primeiro usuário da lista
-
-        //System.out.println("id_usuario: " + id_usuario);
+        UsuarioService usuarioService = new UsuarioService();
+        Usuario usuario = usuarioService.criarUsuario();
 
         given()
         .when()
-                .get("/usuarios/{_id}", id_usuario)
+                .get("/usuarios/{_id}", usuario.getId())
         .then()
-                //.log().all()
                 .assertThat()
                 .statusCode(200)
-                .body("nome", is(notNullValue()))
-                .body("email", is(notNullValue()))
-                .body("password", is(notNullValue()))
-                .body("administrador", is(notNullValue()))
+                .body("nome", equalTo(usuario.getNome()))
+                .body("email", equalTo(usuario.getEmail()))
+                .body("password", equalTo(usuario.getSenha()))
+                .body("administrador", equalTo(usuario.getAdministrador()))
+                .body("_id", equalTo(usuario.getId()))
                 ;
 
     }
