@@ -3,11 +3,11 @@ package br.com.ranieri.login.funcional;
 import br.com.ranieri.base.BaseTest;
 import br.com.ranieri.dto.LoginRequest;
 import br.com.ranieri.dto.Usuario;
+import br.com.ranieri.services.LoginService;
 import br.com.ranieri.services.UsuarioService;
-import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import org.junit.Test;
 
-import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.emptyString;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
@@ -23,11 +23,10 @@ public class LoginSucessoTest extends BaseTest {
         loginRequest.setEmail(usuario.getEmail());
         loginRequest.setSenha(usuario.getSenha());
 
-        String tokenAdmin = given()
-                .body(loginRequest)
-                .contentType(ContentType.JSON)
-                .when()
-                .post("/login")
+        LoginService loginService = new LoginService();
+        Response response = loginService.realizarLogin(loginRequest);
+
+        String tokenAdmin = response
                 .then()
                 .statusCode(200)
                 .body("message", is("Login realizado com sucesso"))
@@ -47,11 +46,10 @@ public class LoginSucessoTest extends BaseTest {
         loginRequest.setEmail(usuario.getEmail());
         loginRequest.setSenha(usuario.getSenha());
 
-        String tokenUser = given()
-                .body(loginRequest)
-                .contentType(ContentType.JSON)
-                .when()
-                .post("/login")
+        LoginService loginService = new LoginService();
+        Response response = loginService.realizarLogin(loginRequest);
+
+        String tokenUser = response
                 .then()
                 .statusCode(200)
                 .body("message", is("Login realizado com sucesso"))

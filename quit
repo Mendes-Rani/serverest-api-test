@@ -1,0 +1,109 @@
+[33mcommit a2e8a7ae43ccd0edd99b2f7fa08faff1bcc0cde1[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Mendes-Rani <ranieridasilvamendes159@gmail.com>
+Date:   Sun Aug 2 19:14:44 2026 -0300
+
+    refactor: refatora testes de login utilizando DTO LoginRequest
+    
+    - Removidos payloads JSON montados manualmente nos testes de login
+    - Criado DTO LoginRequest para representar o corpo das requisições de autenticação
+    - Refatorados cenários positivos e negativos para utilizar serialização automática com Jackson
+    - Melhorada a legibilidade e reduzida duplicação de código nos testes de login
+    - Ajustados os cenários negativos para validar separadamente email inválido, senha inválida e credenciais inválidas
+    - Tornados os testes mais determinísticos utilizando credenciais controladas
+
+[33mcommit 4582d2db1cde44955c431d239b398cdb49fa7666[m
+Author: Mendes-Rani <ranieridasilvamendes159@gmail.com>
+Date:   Sun Aug 2 18:16:41 2026 -0300
+
+    refactor: refatora testes do endpoint de usuários utilizando DTOs
+    
+    - Removida a criação manual de payloads JSON nos testes
+    - Implementada serialização automática utilizando DTOs
+    - Refatorado UsuarioService para trabalhar diretamente com objetos Usuario
+    - Adicionadas anotações JsonProperty e JsonIgnore ao DTO Usuario
+    - Refatorados cenários positivos e negativos para utilizar DTOs em vez de Strings
+    - Eliminada dependência de dados existentes na base utilizando criação dinâmica de usuários
+    - Melhorada a reutilização de código e reduzida duplicação entre os testes
+    - Atualizado README com a nova estrutura do projeto e documentação
+
+[33mcommit b9e30cf25d0c80ee96fc7c53473bdcf1b0508c7d[m
+Author: Mendes-Rani <ranieridasilvamendes159@gmail.com>
+Date:   Thu Jul 30 22:31:29 2026 -0300
+
+    test: adiciona testes funcionais e negativos para o endpoint de login
+    
+    - Implementados cenarios de sucesso para usuarios comuns e administradores
+    - Implementados cenarios de erro para credenciais invalidas
+    - Validado retorno da mensagem de sucesso e do token de autorizacao
+    - Utilizado UsuarioService para criacao dinamica dos usuarios de teste
+
+[33mcommit 02b560bba5b3cdaa9279ee6b54b23c3162e6b94e[m
+Author: Mendes-Rani <ranieridasilvamendes159@gmail.com>
+Date:   Tue Jul 28 20:40:20 2026 -0300
+
+    refactor: cria UsuarioService e DTO para reutilizacao nos testes de usuario
+    
+    - Adicionado DTO Usuario para representar dados dos usuarios criados nos testes
+    - Refatorado UsuarioService para retornar objeto Usuario completo ao invés de apenas o ID
+    - Criado metodo criarUsuario(boolean administrador) para centralizar criação de usuarios comuns e administradores
+    - Adicionados atalhos criarUsuario() e criarUsuarioAdmin()
+    - Refatorados cenarios existentes para utilizarem UsuarioService
+    - Adicionado cenario positivo de cadastro de usuario administrador
+    - Ajustados testes para utilizarem os dados retornados pelo objeto Usuario
+
+[33mcommit 0d5f36d46f439a1f22ae2f4278dac99f9dde7213[m
+Author: Mendes-Rani <ranieridasilvamendes159@gmail.com>
+Date:   Sun Jul 26 22:25:52 2026 -0300
+
+    feat: adiciona cenarios de atualizacao de usuarios
+    
+    - Criado teste positivo para atualizar usuario existente com sucesso
+    - Criado teste positivo para cadastro de usuario via PUT com ID inexistente
+    - Criado teste negativo para impedir atualizacao com email ja cadastrado
+
+[33mcommit 05d0cf4a549441691da6fc5a1690b683e57d786f[m
+Author: Mendes-Rani <ranieridasilvamendes159@gmail.com>
+Date:   Sun Jul 26 20:26:49 2026 -0300
+
+    refactor: adiciona service para criacao de usuario
+    
+    - cria UsuarioService para centralizar criação de usuários de teste
+    - adiciona cenário de exclusão de usuário existente com sucesso
+    - adiciona cenário de exclusão de usuário inexistente
+    - atualiza documentação da estrutura do projeto no README
+
+[33mcommit c9f1a2b076092e22da2e86c102425a1cee6e40f3[m
+Author: Mendes-Rani <ranieridasilvamendes159@gmail.com>
+Date:   Sun Jul 26 18:58:05 2026 -0300
+
+    test: amplia cobertura dos testes de usuario
+
+[33mcommit 5859ae8e75eee126501bae8c4be26764c99e5e13[m
+Author: Mendes-Rani <ranieridasilvamendes159@gmail.com>
+Date:   Sun Jul 26 16:34:27 2026 -0300
+
+    refactor: reorganiza estrutura da automação de testes
+    
+    - move BaseTest para src/test/java
+    - remove estrutura desnecessária de src/main/java
+    - centraliza geração de massa de dados na classe DataGenerator
+    - remove dependência direta do Faker dos testes
+    - renomeia classe de teste
+
+[33mcommit 6d408348b90d8f26bf7078c6b7fdeab501fdb6e5[m
+Author: Mendes-Rani <ranieridasilvamendes159@gmail.com>
+Date:   Sat Jul 18 20:03:27 2026 -0300
+
+    Alterado padrão da estrutura da classes, e nomenclatura das mesmas. Adicionado cenário funcional para criação de usuarios
+
+[33mcommit 2dd71f5db972b4a8f79e80350e0b2a1057df5f0a[m
+Author: Mendes-Rani <ranieridasilvamendes159@gmail.com>
+Date:   Sat Jul 18 16:04:06 2026 -0300
+
+    Adicionando setup inicial da API
+
+[33mcommit 5845658294a1edf3c2331e0603c5f289cf4fec29[m
+Author: Mendes-Rani <ranieridasilvamendes159@gmail.com>
+Date:   Sat Jul 18 16:03:06 2026 -0300
+
+    Initial commit

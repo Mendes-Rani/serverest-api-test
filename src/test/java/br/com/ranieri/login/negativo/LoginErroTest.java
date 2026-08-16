@@ -3,12 +3,12 @@ package br.com.ranieri.login.negativo;
 import br.com.ranieri.base.BaseTest;
 import br.com.ranieri.dto.LoginRequest;
 import br.com.ranieri.dto.Usuario;
+import br.com.ranieri.services.LoginService;
 import br.com.ranieri.services.UsuarioService;
 import br.com.ranieri.utils.DataGenerator;
-import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import org.junit.Test;
 
-import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.is;
 
 public class LoginErroTest extends BaseTest {
@@ -23,11 +23,10 @@ public class LoginErroTest extends BaseTest {
         loginRequest.setEmail(dataGenerator.gerarEmail());
         loginRequest.setSenha(usuario.getSenha());
 
-        given()
-                .body(loginRequest)
-                .contentType(ContentType.JSON)
-                .when()
-                .post("/login")
+        LoginService loginService = new LoginService();
+        Response response = loginService.realizarLogin(loginRequest);
+
+        response
                 .then()
                 .statusCode(401)
                 .body("message", is("Email e/ou senha inválidos"))
@@ -46,11 +45,10 @@ public class LoginErroTest extends BaseTest {
         loginRequest.setEmail(usuario.getEmail());
         loginRequest.setSenha(senhaInvalida);
 
-        given()
-                .body(loginRequest)
-                .contentType(ContentType.JSON)
-                .when()
-                .post("/login")
+        LoginService loginService = new LoginService();
+        Response response = loginService.realizarLogin(loginRequest);
+
+        response
                 .then()
                 .statusCode(401)
                 .body("message", is("Email e/ou senha inválidos"))
@@ -66,11 +64,10 @@ public class LoginErroTest extends BaseTest {
         loginRequest.setEmail(dataGenerator.gerarEmail());
         loginRequest.setSenha(dataGenerator.gerarSenha());
 
-        given()
-                .body(loginRequest)
-                .contentType(ContentType.JSON)
-                .when()
-                .post("/login")
+        LoginService loginService = new LoginService();
+        Response response = loginService.realizarLogin(loginRequest);
+
+        response
                 .then()
                 .statusCode(401)
                 .body("message", is("Email e/ou senha inválidos"))
