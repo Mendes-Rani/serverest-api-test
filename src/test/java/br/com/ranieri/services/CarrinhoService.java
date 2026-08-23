@@ -23,4 +23,13 @@ public class CarrinhoService {
         return response;
     }
 
+    public Response listarCarrinhosId(String id){
+        Response response = given()
+                .pathParam("id", id)
+                .when()
+                .get("/carrinhos/{id}")
+                ;
+        return response;
+    }
+
 }
