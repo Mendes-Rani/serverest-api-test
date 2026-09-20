@@ -27,4 +27,13 @@ public class ProdutoService {
         return response;
     }
 
+    public Response listarProdutoPorId(String id){
+        Response response = given()
+                .pathParam("id", id)
+                .when()
+                .get("/produtos/{id}")
+                ;
+        return response;
+    }
+
 }
