@@ -22,4 +22,8 @@ public class DataGenerator {
     public String gerarIdAleatorio(){
         return faker.random().hex(16);
     }
+
+    public String gerarNomeProduto(){
+        return faker.commerce().productName();
+    }
 }
