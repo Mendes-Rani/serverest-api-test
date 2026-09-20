@@ -18,4 +18,13 @@ public class ProdutoService {
                 ;
         return response;
     }
+
+    public Response listarProdutos(){
+        Response response = given()
+                .when()
+                .get("/produtos")
+                ;
+        return response;
+    }
+
 }
